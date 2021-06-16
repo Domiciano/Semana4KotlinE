@@ -21,12 +21,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, ModalDialog.OnOkListener {
 
 
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
     private lateinit var file: File
+
+    private lateinit var dialog:ModalDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +84,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.downloadImage -> {
-                val url = urlImageET.text.toString()
-                Glide.with(this).load(url).fitCenter().into(mainImage)
+                dialog = ModalDialog.newInstance()
+                dialog.listener = this
+                dialog.show(supportFragmentManager, "dialog")
             }
         }
     }
@@ -101,5 +104,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val image = BitmapFactory.decodeFile(path)
             mainImage.setImageBitmap(image)
         }
+    }
+
+    override fun onOk(url: String) {
+        dialog.dismiss()
+        Glide.with(this).load(url).fitCenter().into(mainImage)
     }
 }
