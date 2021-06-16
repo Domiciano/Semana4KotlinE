@@ -55,6 +55,7 @@
         android:ems="10"
         android:hint="URL de imagen"
         android:inputType="textPersonName"
+        android:text="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/downloadImage" />

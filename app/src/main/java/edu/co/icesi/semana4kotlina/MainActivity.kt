@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         openCamaraBtn.setOnClickListener(this)
         openGalleryBtn.setOnClickListener(this)
+        downloadImage.setOnClickListener(this)
 
     }
 
@@ -77,6 +79,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val i = Intent(Intent.ACTION_GET_CONTENT)
                 i.setType("image/*")
                 galleryLauncher.launch(i)
+            }
+
+            R.id.downloadImage -> {
+                val url = urlImageET.text.toString()
+                Glide.with(this).load(url).fitCenter().into(mainImage)
             }
         }
     }
